@@ -1,23 +1,20 @@
-ipipeline {
+pipeline {
     agent any
 
     stages {
-        stage('prep') {
+        stage('Hello') {
             steps {
-                echo 'Hello World'
-                            
+                echo "hello world"
+            }
+        }
+        stage('code') {
+            steps {
+                git changelog: false, poll: false, url: 'https://github.com/Ajayaws773/mavenrepo.git'
             }
         }
         stage('build') {
             steps {
-                echo 'Hello World2'
-
-            }
-        }
-        stage('deploy') {
-            steps {
-                echo 'Hello World3'
-
+                sh 'mvn package'
             }
         }
     }
